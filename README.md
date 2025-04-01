@@ -1,7 +1,7 @@
 # flappy bird AI w/ TensorFlowJS Reinforcement Learning (Q-learning) 
 coming soon... 
 
-## inspired by: https://flappybird-ai.netlify.app/ 
+### inspired by: https://flappybird-ai.netlify.app/ 
 
-# [play floppy bird](https://nebezb.com/floppybird/)
+credits to https://github.com/nebez/floppybird for game copy 
 
