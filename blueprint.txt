@@ -1,0 +1,113 @@
++-----------------------+
+|      GameEngine       |
++-----------------------+
+| - bird: Bird          |
+| - pipes: Pipe[]       |
+| - gravity: number     |
+| - tick(): void        |
+| - reset(): void       |
+| - render(): void      |
+| - updatePhysics(): void
++-----------------------+
+
+           |
+           v
+
++----------------------+
+|        Bird          |
++----------------------+
+| - x, y: number        |
+| - velocity: number    |
+| - jump(): void        |
+| - update(): void      |
++----------------------+
+
+           |
+           v
+
++----------------------+
+|        Pipe          |
++----------------------+
+| - x: number           |
+| - gapY: number        |
+| - passed: boolean     |
+| - update(): void      |
+| - render(): void      |
++----------------------+
+
+           |
+           v
+
++-----------------------------+
+|        AIController         |
++-----------------------------+
+| - model: tf.Sequential      |
+| - ε: number (exploration)   |
+| - memory: Experience[]      |
+| - act(state): 0 | 1         |
+| - remember(s, a, r, s', d)  |
+| - replay(): void            |
+| - train(): void             |
++-----------------------------+
+
+           |
+           v
+
++-----------------------------+
+|        Experience           |
++-----------------------------+
+| - state: number[]           |
+| - action: number            |
+| - reward: number            |
+| - nextState: number[]       |
+| - done: boolean             |
++-----------------------------+
+
+
+
+Absolutely — here’s a **concise summary** explaining the **technology** behind your Flappy Bird AI and how it works with **TensorFlow.js**:
+
+---
+
+### 🧠 **Flappy Bird AI with TensorFlow.js — How It Works**
+
+This project uses **Reinforcement Learning (RL)** to teach an AI how to play Flappy Bird using **TensorFlow.js**, a machine learning library for the browser.
+
+#### ⚙️ **Technology Stack**
+- **JavaScript + HTML5 Canvas**: For rendering and controlling the Flappy Bird game in the browser.
+- **TensorFlow.js**: For building and training the neural network that powers the AI.
+- **Deep Q-Learning (DQN)**: A type of reinforcement learning algorithm that lets the AI learn from trial and error.
+
+---
+
+### 🚀 **How It Works**
+1. **Game Environment**: 
+   - Simulates bird physics, pipes, gravity, and collisions.
+   - Each frame gives the AI a simplified state (e.g., bird Y position, velocity, pipe distance).
+
+2. **State → Action Mapping**:
+   - The AI uses a **neural network** to predict the best action: `jump` or `do nothing`.
+
+3. **Rewards**:
+   - The AI is rewarded for staying alive (+1) and penalized heavily for crashing (-100).
+
+4. **Training (DQN Loop)**:
+   - The AI stores experiences: `(state, action, reward, nextState, done)` in memory.
+   - Periodically, it samples from this memory to **train the network** using backpropagation and Q-learning.
+   - It improves by updating predictions with the **Bellman equation**:
+     \[
+     Q(s, a) = r + \gamma \max Q(s', a')
+     \]
+
+5. **TensorFlow.js Role**:
+   - Defines the neural network structure in the browser (with `tf.Sequential`).
+   - Handles tensor math, gradient descent, and model training in real-time — all **in JavaScript**, no server required.
+
+---
+
+### ✅ **Result**
+Over time, the AI learns to **jump more strategically**, surviving longer and scoring higher — all from **trial, error, and self-improvement** inside your browser.
+
+---
+
+Let me know if you want this turned into a blog post or slide deck too!
