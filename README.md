@@ -1,4 +1,4 @@
-# flappy bird AI w/ TensorFlowJS Reinforcement Learning (Q-learning) 
+flappy bird AI w/ TensorFlowJS Reinforcement Learning (Q-learning) 
 
 
 inspired by: https://flappybird-ai.netlify.app/ 
