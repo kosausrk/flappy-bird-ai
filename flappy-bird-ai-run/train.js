@@ -90,7 +90,7 @@ async function getOrCreateAgent(stateSize, actionSize, modelPath) {
 (async () => {
   //Change depending on how many gen you want 
 
-  const EPISODES = 10000;
+  const EPISODES = 5000;
   const game = new GameEngine();
   
   
@@ -137,6 +137,21 @@ async function getOrCreateAgent(stateSize, actionSize, modelPath) {
       `— score=${game.score}` +
       (game.score === bestScore ? ' ← new best!' : '')
     );
+
+    // ─── AUTO‑CHECKPOINT ─────────────────────────────────────
+    if (ep % 500 === 0) {
+      console.log(`\n--- Auto‑checkpoint at episode ${ep} ---`);
+      const ckptDir = `./models/checkpoint-${ep}`;
+      await saveModelToFile(agent.model, ckptDir);
+      fs.writeFileSync(
+        './models/bestScore.json',
+        JSON.stringify({ bestScore }, null, 2),
+        'utf8'
+      );
+      console.log('✅ Auto‑checkpoint saved');
+    }
+    
+
   }
 
   console.log(`\n Training complete! Best score: ${bestScore}`);
