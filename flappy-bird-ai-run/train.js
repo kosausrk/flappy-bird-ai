@@ -90,7 +90,7 @@ async function getOrCreateAgent(stateSize, actionSize, modelPath) {
 (async () => {
   //Change depending on how many gen you want 
 
-  const EPISODES = 5000;
+  const EPISODES = 100;
   const game = new GameEngine();
   
   
@@ -156,7 +156,6 @@ async function getOrCreateAgent(stateSize, actionSize, modelPath) {
 
   console.log(`\n Training complete! Best score: ${bestScore}`);
   await saveModelToFile(agent.model, './models/flappy-dqn');
-
 
   process.exit(0);
 })();

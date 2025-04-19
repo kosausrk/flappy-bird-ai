@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tensorflow/tfjs": "^4.22.0"
+    "@tensorflow/tfjs": "^4.22.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
   }
 }
