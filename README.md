@@ -8,7 +8,7 @@ I: CLI-Based Training (50 Episodes, 5k Memory)
 Self-learning Flappy Bird AI built with TensorFlow.js and Deep Q-Learning.
 The agent trains from scratch in a Node.js environment, improving through trial and error over 50 episodes using a memory buffer of 5,000 game states.
 
-<video src="media/demo.webm" width="400" autoplay loop muted></video>
+![AI Playing Flappy Bird](media/demo.gif)
 
 II: In-Browser Demo
 The trained model is loaded directly into the browser, where it plays in real-time on a canvas using only JavaScript and TensorFlow.js — no backend required.
