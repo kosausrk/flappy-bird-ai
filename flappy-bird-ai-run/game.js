@@ -87,24 +87,50 @@ class GameEngine {
       return { state: this.getState(), reward, done: this.done };
     }
   
+
+    
     render() {
       const ctx = this.ctx;
-      ctx.clearRect(0, 0, 400, 600);
-      // bird
+    
+      // Background gradient
+      const gradient = ctx.createLinearGradient(0, 0, 0, 600);
+      gradient.addColorStop(0, '#70c5ce'); // light sky blue
+      gradient.addColorStop(1, '#ffffff'); // bottom white
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 400, 600);
+    
+      // Bird
       ctx.fillStyle = 'yellow';
-      ctx.fillRect(this.bird.x, this.bird.y, 20, 20);
-      // pipes
-      ctx.fillStyle = 'green';
+      ctx.strokeStyle = 'orange';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(this.bird.x, this.bird.y, 20, 20, 5);
+      ctx.fill();
+      ctx.stroke();
+    
+      // Pipes
       this.pipes.forEach(p => {
+        // Top pipe
+        ctx.fillStyle = '#2ecc71'; // green
+        ctx.strokeStyle = '#27ae60'; // darker outline
+        ctx.lineWidth = 2;
         ctx.fillRect(p.x, 0, p.width, p.gapY - 100);
+        ctx.strokeRect(p.x, 0, p.width, p.gapY - 100);
+    
+        // Bottom pipe
         ctx.fillRect(p.x, p.gapY, p.width, 600 - p.gapY);
+        ctx.strokeRect(p.x, p.gapY, p.width, 600 - p.gapY);
       });
-      // score
+    
+      // Score text
       ctx.fillStyle = 'white';
-      ctx.font = '24px sans-serif';
-      ctx.fillText(`Score: ${this.score}`, 10, 30);
+      ctx.font = '28px Arial';
+      ctx.shadowColor = 'black';
+      ctx.shadowBlur = 4;
+      ctx.fillText(`Score: ${this.score}`, 10, 35);
+      ctx.shadowBlur = 0; // reset shadow
     }
-  }
+}
 
   
   
