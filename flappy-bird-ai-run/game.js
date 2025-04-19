@@ -19,7 +19,13 @@ class GameEngine {
     // returns state vector [birdY, birdVel, pipeXDist, pipeGapY]
     getState() {
       // find next pipe
-      const nextPipe = this.pipes.find(p => p.x + p.width > this.bird.x) || this.pipes[0];
+      //REPLACED
+      const nextPipe = this.pipes.find(p => p.x + p.width > this.bird.x) || 
+                 this.pipes[0] || 
+                 { x: 400, gapY: 300, width: 50 };
+      
+      
+
       return [
         this.bird.y / 600,
         this.bird.vel / 10,
@@ -129,6 +135,9 @@ class GameEngine {
       ctx.shadowBlur = 4;
       ctx.fillText(`Score: ${this.score}`, 10, 35);
       ctx.shadowBlur = 0; // reset shadow
+
+
+      console.log('Rendering frame');
     }
 }
 

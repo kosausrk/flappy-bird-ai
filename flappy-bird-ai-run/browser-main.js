@@ -1,3 +1,6 @@
+console.log("✅ browser-main.js is loaded!");
+
+
 const canvas = document.getElementById('gameCanvas');
 const game = new GameEngine(canvas);
 const agent = new DQNAgent(4, 2);
@@ -5,8 +8,11 @@ const agent = new DQNAgent(4, 2);
 const statusDiv = document.getElementById("status");
 
 async function trainEpisode() {
+  console.log("🎯 New Episode Started");
   game.reset();
   let { state, reward, done } = { state: game.getState(), reward: 0, done: false };
+
+  let stepCount = 0;
 
   while (!done) {
     const action = agent.act(state);
@@ -15,32 +21,44 @@ async function trainEpisode() {
     state = stepResult.state;
     done = stepResult.done;
 
-    if (game.frameCount % 5 === 0 && agent.memory.length > 1000) {
-      await agent.replay(64);
+    stepCount++;
+    if (stepCount % 30 === 0) {
+      console.log(`📦 Step ${stepCount}, Score: ${game.score}`);
     }
 
-    await tf.nextFrame(); // render frame and allow UI to update
+    if (game.frameCount % 5 === 0 && agent.memory.length > 10) {
+      console.log("📚 Training mini-batch...");
+      await agent.replay(32);
+    }
+
+    await tf.nextFrame(); // yield to browser to keep canvas smooth
   }
+
+  console.log(`✅ Episode complete — Final Score: ${game.score}`);
 }
 
 (async function runTrainingLoop() {
-  for (let ep = 1; ep <= 50; ep++) {
-    await trainEpisode();
-    const msg = `Episode ${ep} — Score: ${game.score} — ε=${agent.epsilon.toFixed(2)}`;
-    console.log(msg);
-    if (statusDiv) statusDiv.innerText = msg;
-  }
+  try {
+    console.log("⏳ Starting training loop...");
+    for (let ep = 1; ep <= 5; ep++) {
+      await trainEpisode();
+      const msg = `Episode ${ep} — Score: ${game.score} — ε=${agent.epsilon.toFixed(2)}`;
+      console.log(msg);
+      if (statusDiv) statusDiv.innerText = msg;
+    }
 
-  console.log('✅ Training complete! Now watch the AI play.');
-  if (statusDiv) statusDiv.innerText = '✅ Training complete! AI is now playing...';
+    console.log('🎉 Training complete! Now watching AI.');
+    if (statusDiv) statusDiv.innerText = '🎉 Training complete! Watching AI...';
 
-  // OPTIONAL: Save model in browser
-  // await agent.model.save('indexeddb://flappy-dqn');
+    agent.epsilon = 0.0;
+    for (let i = 1; i <= 3; i++) {
+      console.log(`👀 Watch run ${i}`);
+      await trainEpisode();
+      if (statusDiv) statusDiv.innerText = `👀 Watching AI — Run ${i} — Score: ${game.score}`;
+    }
 
-  // Let the AI play forever (no learning)
-  agent.epsilon = 0.0;
-  while (true) {
-    await trainEpisode();
-    if (statusDiv) statusDiv.innerText = `Watching AI — Score: ${game.score}`;
+  } catch (err) {
+    console.error("🔥 Error in training loop:", err);
+    if (statusDiv) statusDiv.innerText = "⚠️ Error occurred. Check console.";
   }
 })();
