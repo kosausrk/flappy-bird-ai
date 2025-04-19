@@ -13,14 +13,15 @@ class DQNAgent {
       this.buildModel();
     }
   
-    buildModel() {
+    buildModel() { //change from 24 -> 64 neurons
+      
       this.model = tf.sequential();
-      this.model.add(tf.layers.dense({ inputShape: [this.stateSize], units: 24, activation: 'relu' }));
-      this.model.add(tf.layers.dense({ units: 24, activation: 'relu' }));
+      this.model.add(tf.layers.dense({ inputShape: [this.stateSize], units: 64, activation: 'relu' }));
+      this.model.add(tf.layers.dense({ units: 64, activation: 'relu' }));
       this.model.add(tf.layers.dense({ units: this.actionSize, activation: 'linear' }));
       this.model.compile({ optimizer: 'adam', loss: 'meanSquaredError' });
     }
-  
+      
     act(state) {
       if (Math.random() < this.epsilon) {
         return Math.floor(Math.random() * this.actionSize);

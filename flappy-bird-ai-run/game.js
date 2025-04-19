@@ -69,8 +69,21 @@ class GameEngine {
   
       // render
       this.render();
-      // reward: +1 per frame alive, -100 on crash
-      const reward = this.done ? -100 : 1;
+      
+      
+      //reward function 
+      let reward = 0.1;  // small reward for surviving
+      this.pipes.forEach(p => {
+        if (!p.passed && p.x + p.width < this.bird.x) {
+          this.score++;
+          reward += 5;  // reward for passing pipe
+          p.passed = true;
+        }
+      });
+      if (this.done) reward = -100;
+
+
+
       return { state: this.getState(), reward, done: this.done };
     }
   
