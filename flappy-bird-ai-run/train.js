@@ -90,7 +90,7 @@ async function getOrCreateAgent(stateSize, actionSize, modelPath) {
 (async () => {
   //Change depending on how many gen you want 
 
-  const EPISODES = 15;
+  const EPISODES = 30;
   const game = new GameEngine();
   
   
