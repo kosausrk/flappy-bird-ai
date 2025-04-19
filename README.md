@@ -15,5 +15,7 @@ The trained model is loaded directly into the browser, where it plays in real-ti
 Includes real-time visualization of gameplay, score, and optional live training.
 
 
-![AI Playing Flappy Bird](flappy-bird-ai-run/media/flappy-browser-demo-live.gif)
+![AI Playing Flappy Bird](flappy-bird-ai-run/media/flappy-browser-demo.gif)
+
+
 
