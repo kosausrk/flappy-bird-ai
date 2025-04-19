@@ -1,3 +1,7 @@
+//basic flappy bird **so its easier to train 
+
+
+
 class GameEngine {
     constructor(canvas) {
       this.ctx = canvas.getContext('2d');

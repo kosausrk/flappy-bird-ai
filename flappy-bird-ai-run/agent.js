@@ -1,3 +1,6 @@
+const tf = require('@tensorflow/tfjs');
+
+
 class DQNAgent {
     constructor(stateSize, actionSize) {
       this.stateSize = stateSize;
@@ -67,3 +70,6 @@ class DQNAgent {
   }
 
   
+
+  module.exports = { DQNAgent };
+ 
