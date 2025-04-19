@@ -7,6 +7,29 @@ const agent = new DQNAgent(4, 2);
 
 const statusDiv = document.getElementById("status");
 
+
+async function loadPretrainedModel() {
+    try {
+      const model = await tf.loadLayersModel('./models/flappy-dqn/model.json');
+      model.compile({
+        optimizer: 'adam',
+        loss: 'meanSquaredError'
+      });
+  
+      agent.model = model;
+      agent.epsilon = 0.0; // only exploit, no training if you want
+  
+      console.log("✅ Loaded pretrained model!");
+      statusDiv.innerText = "✅ Loaded pretrained model!";
+    } catch (err) {
+      console.error("❌ Failed to load model:", err);
+    }
+  }
+  
+  
+ 
+
+
 async function trainEpisode() {
   console.log("🎯 New Episode Started");
   game.reset();
@@ -40,7 +63,12 @@ async function trainEpisode() {
 (async function runTrainingLoop() {
   try {
     console.log("⏳ Starting training loop...");
-    for (let ep = 1; ep <= 5; ep++) {
+    
+    //SET GENERATION AMOUNT 
+    await loadPretrainedModel();
+
+
+    for (let ep = 1; ep <= 50; ep++) {
       await trainEpisode();
       const msg = `Episode ${ep} — Score: ${game.score} — ε=${agent.epsilon.toFixed(2)}`;
       console.log(msg);
