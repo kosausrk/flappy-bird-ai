@@ -3,7 +3,7 @@ flappy bird AI w/ TensorFlowJS Reinforcement Learning (Q-learning)
 inspired by: https://flappybird-ai.netlify.app/ 
 credits to https://github.com/nebez/floppybird for game copy 
 
-Medium Article: https://medium.com/@ks2496/teaching-a-bird-to-fly-training-flappy-bird-ai-in-the-browser-with-tensorflow-d8aa90543e2c 
+## Medium Article: https://medium.com/@ks2496/teaching-a-bird-to-fly-training-flappy-bird-ai-in-the-browser-with-tensorflow-d8aa90543e2c 
 
 ### I: CLI-Based Training (50 Episodes, 5k Memory)
 Self-learning Flappy Bird AI built with TensorFlow.js and Deep Q-Learning.
