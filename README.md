@@ -1,5 +1,6 @@
 flappy bird AI w/ TensorFlowJS Reinforcement Learning (Q-learning) 
-**Tags**: `reinforcement learning` · `TensorFlow.js` · `Q-learning` · `JavaScript` · `game AI` · `browser ML` · `canvas rendering` · `deep learning` · `Node.js` · `AI demo`
+
+**Tags**: `reinforcement learning` · `TensorFlow.js` · `Q-learning` 
 
 inspired by: https://flappybird-ai.netlify.app/ 
 credits to https://github.com/nebez/floppybird for game copy 
